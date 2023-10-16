@@ -1,21 +1,22 @@
 {
-  "name": "Wanlo - YouTube Downloader",
-  "short_name": "Wanlo",
+  "name": "YouTube Downloader",
+  "short_name": "Wanlo Beta 🤖",
   "description": "Dead Simple YouTube downloader, as an app",
   "icons": [
     {
       "sizes": "192x192",
       "type": "image/png",
-      "src": "https://cdn.serverse.org/images/whips.png"
+      "src": "https://www.wanlo.co/assets/favicon.png"
     },
     {
       "sizes": "512x512",
       "type": "image/png",
-      "src": "https://cdn.serverse.org/images/whips.png"
+      "src": "https://www.wanlo.co/assets/favicon.png"
     }
   ],
   "display": "standalone",
   "background_color": "black",
   "theme_color": "black",
-  "start_url": "/index.html"
+  "start_url": "/index.html", 
+  "publisher": "Ethan Dutson"  
 }

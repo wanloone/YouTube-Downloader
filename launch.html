@@ -1,0 +1,167 @@
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    
+
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.ibb.co/6yS8trk/image.png"
+    />
+    <meta title="Wanlo" />
+    <meta charset="utf-8" />
+    <meta title="Wanlo" />
+    <meta charset="utf-8" />
+    <meta property="og:title" content="Wanlo" />
+    <meta property="og:site_name" content="Wanlo" />
+    <meta
+      property="og:description"
+      content="Wanlo, the dead simple youtube downloader"
+    />
+    <meta
+      property="og:image"
+      content="https://i.ibb.co/6yS8trk/image.png"
+    />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta
+      description="Wanlo, the dead simple youtube downloader"
+    />
+    <title>Whips Soda</title>
+
+    <link rel="stylesheet" href="/index.css" />
+    <link
+      rel="shortcut icon"
+      href="https://i.ibb.co/6yS8trk/image.png"
+    />
+    <script src="/index.js"></script>
+     <link rel="stylesheet" href="/index.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="canonical" href="https://pwa.glitch.me/">
+  <link rel="shortcut icon" href="https://i.ibb.co/6yS8trk/image.png">
+  <script src="/index.js"></script>
+  <script>
+    // This is just to force HTTPS (can't do it statically on glitch)
+    if(location.protocol == 'http:') location.protocol = 'https:';
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker registered', reg))
+        .catch(err => console.error('Service Worker **not** registered', err));
+    }
+    else {
+      console.warn('Service Worker not supported in this browser');
+    }    
+  </script>
+
+
+
+    
+    
+    
+    
+    <style>
+  @import "https://d3.secretgunner.repl.co/style.css";
+
+body {
+  background-color: #1f1f1f;
+  color:white;
+  display:flex;justify-content:center;flex-direction:column;align-items:center;vertical-align:center;
+  height:100vh;
+  width:100vw;
+  margin:0;
+  padding:0;
+}
+
+
+
+
+.qualitychecked {
+  background-color:#606060;
+  color:white;
+}
+
+video {
+  border-radius:5px;
+  object-fit:cover;
+  width:400px;
+  height:200px;
+}
+
+form {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  align-items:center;
+  width: 100%;
+}
+
+input {
+  padding:20px;
+  border-radius:50px;
+  width:50%;
+}
+    </style>
+  </head>
+  <body>
+    <form>
+      <img src="https://i.ibb.co/6yS8trk/image.png" width="200"><br>
+      <input type="url" placeholder="Insert a YouTube URL to turn it into a .mp4!"><br>
+     <div class="buttons">
+       <a class="button" id="btn">360p</a>  <a id="btn" class="button">720p</a>
+         <a class="button" id="btn">1080p</a>
+      </div><br>
+      <button class="button filled" type="submit">Convert</button><br>
+    </form>
+    <video width="400" height="200" controls></video>
+    <script>
+      const API_URL = "https://api.down-rewrite.repl.co"
+
+async function download() {
+  const input = document.querySelector('input');
+  if (input.value == "") return 
+const quality = document.querySelector('.qualitychecked').innerText;
+console.log(quality);
+console.log(input.value);
+
+// Encode the input.value before appending it to the URL
+const encodedInputValue = encodeURIComponent(input.value);
+
+// Encode the quality before appending it to the URL (if necessary)
+// Assuming quality doesn't need encoding, but you may use encodeURIComponent here as well if needed.
+const encodedQuality = quality;
+
+const fetchUrl = `/api/download?url=${input.value}&quality=${quality}`
+console.log(fetchUrl);
+
+const response = await fetch(fetchUrl, {
+ method: "GET",
+  headers: {
+    "Content-Type": "application/json"
+  }
+}).then(res => res.json())
+  
+    console.log(response); 
+    if (response.url.error) return alert('YouTube video failed to download.');
+    return response.url;
+}
+
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault()
+  
+ console.log(await download())
+  document.querySelector('video').src = await download()
+})
+
+document.querySelectorAll('#btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    
+   document.querySelectorAll('#btn').forEach(bn => bn.classList.remove('qualitychecked'))
+    btn.classList.add('qualitychecked') 
+})
+})
+    </script>
+  </body>
+</html>
+

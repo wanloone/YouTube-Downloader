@@ -112,6 +112,7 @@ input {
       <button class="button filled" type="submit">Convert</button><br>
     </form>
     <video id="source" controls download width="200" height="200"></video>
+     <a class="button" id="dwn" disabled>Download</a>
     <script>
             const API_URL = "https://api.down-rewrite.repl.co"
            
@@ -149,18 +150,26 @@ document.querySelector('form').addEventListener('submit', async (e) => {
   e.preventDefault()
  document.querySelector('#source').style.display = "block"
   const link = await download()
-  
+  document.querySelector('#dwn').setAttribute('disabled', 'false')
   if (!link.url.download) {
     if (link.hdAvailable) {
       if (link.askedForHD == true) {
+        
+  document.querySelector('#dwn').setAttribute('href', link.url.urls['hd'])
   document.querySelector('#source').src = link.url.urls['hd']
       } else {
         document.querySelector('#source').src = link.url.urls['sd']
+          document.querySelector('#dwn').setAttribute('href', link.url.urls['sd'])
+
       }
     } else {
+        document.querySelector('#dwn').setAttribute('href', link.url.urls['sd'])
+
         document.querySelector('#source').src = link.url.urls['sd']
     }
   } else {
+      document.querySelector('#dwn').setAttribute('href', link.url.download)
+
     document.querySelector('#source').src = link.url.download
   }
 })
